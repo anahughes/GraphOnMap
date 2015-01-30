@@ -1,0 +1,32 @@
+<html>
+<head><title>GraphOnMap</title></head>
+<body>
+<link rel="stylesheet" type="text/css" href="GraphOnMap.css">
+<script src="GraphOnMap.js"></script>
+<script src="data.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5jobc5amO-zXdnSIHJ8_7sqDcqHSYTP8&sensor=false"></script>
+<script type="text/javascript">
+var myMapGraph = new GraphOnMap();
+myMapGraph.shadowLeftRatio = 0;
+myMapGraph.shadowTopRatio = 0;
+myMapGraph.DataSets = [{ id: "Moscow_Drive", data: Moscow_Drive }];
+var PlotGroups = new Array();
+PlotGroups[0] = [{
+	dataset: "Moscow_Drive",
+	propertyToPlot: "speed",
+	textDisplayTemplate: "Driver in town<br />Speed:{textDisplayProperty}mph",
+	scale: 2,
+	textDisplayProperty: "speed",
+	fillStyle: "rgba(255,255,0, 0.4)",
+	strokeStyle: "rgba(255,255,0, 0.9)"
+	}];
+function ShowPlot(plotIndex){
+	myMapGraph.Plots = PlotGroups[plotIndex];
+	myMapGraph.initialize("myMapGraphDiv");
+}
+$(document).ready(function(){ShowPlot(0)});
+</script>
+<div id="myMapGraphDiv" class="MapGraphContainer"></div>
+</body>
+</html>
